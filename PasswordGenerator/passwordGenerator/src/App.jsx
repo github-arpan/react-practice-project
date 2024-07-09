@@ -51,7 +51,7 @@ function App() {
               className="outline-none w-full cursor-pointer py-1 px-3 text-black"
             />
             <button
-              className="cursor-pointer py-0.5 shrink-0 px-3 outline-none hover:bg-blue-600 bg-blue-700 text-white"
+              className="cursor-pointer py-0.5 shrink-0 px-3 outline-none  bg-blue-700 text-white active:scale-95"
               onClick={passCopytoclipboard}
             >
               Copy
