@@ -1,35 +1,43 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 function App() {
-  const [password, setPassword] = useState("");
+  const [password, setPassord] = useState("");
   const [length, setLength] = useState(8);
-  const [numAllowed, setNumAllowed] = useState(false);
   const [charAllowed, setCharAllowed] = useState(false);
+  const [numAllowed, setNumAllowed] = useState(false);
+
+  const passwordRef = useRef(null);
 
   const passwordGenerator = useCallback(() => {
     let pass = "";
     let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
-    if (numAllowed) str += "0123456789";
-    if (charAllowed) str += "!@#$%&~?-_+{}[]=*";
-
+    if (charAllowed) {
+      str += "~!@#$%&*()_-+{}?";
+    }
+    if (numAllowed) {
+      str += "0123456789";
+    }
     for (let i = 1; i <= length; i++) {
       let char = Math.floor(Math.random() * str.length + 1);
-
       pass += str.charAt(char);
     }
 
-    setPassword(pass);
-  }, [length, numAllowed, charAllowed, setPassword]);
+    setPassord(pass);
+  }, [length, charAllowed, numAllowed, setPassord]);
 
+  const passCopytoclipboard = useCallback(() => {
+    passwordRef.current?.select();
+    window.navigator.clipboard.writeText(password);
+  }, [password]);
   useEffect(() => {
     passwordGenerator();
-  }, [length, numAllowed, charAllowed, passwordGenerator]);
+  }, [length, charAllowed, numAllowed, passwordGenerator]);
 
   return (
     <>
-      <div className=" w-full h-screen bg-black">
-        <div className="max-w-md  mx-auto px-4 py-4 shadow-sm rounded-lg bg-gray-700   text-orange-500">
+      <div className="w-full h-screen flex justify-center items-center">
+        <div className="max-w-lg w-2/3  mx-auto px-4 py-4 shadow-sm rounded-lg bg-gray-800  h-52 my-8   text-blue-500">
           <h1 className="text-white text-center text-xl my-4">
             Random Password Generator
           </h1>
@@ -39,20 +47,24 @@ function App() {
               value={password}
               placeholder="password Generator"
               readOnly
-              className="outline-none w-full cursor-pointer py-1 px-3"
+              ref={passwordRef}
+              className="outline-none w-full cursor-pointer py-1 px-3 text-black"
             />
-            <button className="cursor-pointer py-0.5 shrink-0 px-3 outline-none bg-blue-700 text-white">
+            <button
+              className="cursor-pointer py-0.5 shrink-0 px-3 outline-none hover:bg-blue-600 bg-blue-700 text-white"
+              onClick={passCopytoclipboard}
+            >
               Copy
             </button>
           </div>
-          <div className="flex text-sm gap-x-2">
-            <div className="flex items-center gap-x-1">
+          <div className="flex text-sm justify-evenly mt-8 ">
+            <div className="flex items-center">
               <input
                 type="range"
-                min={6}
-                max={20}
+                min={8}
+                max={50}
                 value={length}
-                className="cursor-pointer"
+                className="cursor-pointer mr-2"
                 onChange={(e) => {
                   setLength(e.target.value);
                 }}
@@ -60,12 +72,12 @@ function App() {
               <label>Length : {length}</label>
             </div>
 
-            <div className="flex items-center gap-x-1">
+            <div className="">
               <input
                 type="checkbox"
                 defaultChecked={numAllowed}
                 id="numberInput"
-                className="cursor-pointer"
+                className="cursor-pointer mr-2"
                 onChange={() => {
                   setNumAllowed((prev) => !prev);
                 }}
@@ -73,12 +85,12 @@ function App() {
               <label>Number</label>
             </div>
 
-            <div className="flex items-center gap-x-1">
+            <div className=" ">
               <input
                 type="checkbox"
                 defaultChecked={charAllowed}
                 id="characterInput"
-                className="cursor-pointer"
+                className="cursor-pointer mr-2"
                 onChange={() => {
                   setCharAllowed((prev) => !prev);
                 }}
