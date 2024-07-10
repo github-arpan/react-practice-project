@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { API_URL } from "../constant/Api";
 
-function UseCurrencyinfo(currency) {
+function useCurrencyinfo(currency) {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    fetch(API_URL)
+    fetch(
+      `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${currency}.json`
+    )
       .then((res) => res.json())
       .then((res) => setData(res[currency]));
   }, [currency]);
@@ -13,4 +14,4 @@ function UseCurrencyinfo(currency) {
   return data;
 }
 
-export default UseCurrencyinfo;
+export default useCurrencyinfo;
