@@ -70,7 +70,7 @@ function App() {
             </div>
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg"
+              className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg active:scale-95"
             >
               Convert {from.toLocaleUpperCase()} to {to.toLocaleUpperCase()}
             </button>
