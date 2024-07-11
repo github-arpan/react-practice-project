@@ -32,7 +32,7 @@ function App() {
       }}
     >
       <div className="w-full">
-        <div className="w-full max-w-md mx-auto border border-gray-60 rounded-lg p-5 backdrop-blur-sm bg-white/30">
+        <div className="w-full lg:max-w-lg max-w-sm  mx-auto border border-gray-60 rounded-lg p-5 backdrop-blur-sm bg-white/30">
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -44,7 +44,7 @@ function App() {
                 label="From"
                 amount={amount}
                 currencyOptions={options}
-                onCurrencyChange={(currency) => setAmount(amount)}
+                onCurrencyChange={(currency) => setFrom(currency)}
                 selectCurrency={from}
                 onAmountChange={(amount) => setAmount(amount)}
               />
