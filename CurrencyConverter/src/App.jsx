@@ -4,7 +4,7 @@ import useCurrencyinfo from "./hooks/useCurrencyinfo";
 import { BG_URL } from "./utils/constant";
 
 function App() {
-  const [amount, setAmount] = useState();
+  const [amount, setAmount] = useState(0);
   const [from, setFrom] = useState("usd");
   const [to, setTo] = useState("inr");
   const [convertedAmount, setConvertedAmount] = useState(0);
@@ -42,7 +42,7 @@ function App() {
             <div className="w-full mb-1">
               <InputBox
                 label="From"
-                amount={amount}
+                amount={amount.toFixed(0)}
                 currencyOptions={options}
                 onCurrencyChange={(currency) => setFrom(currency)}
                 selectCurrency={from}
