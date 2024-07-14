@@ -5,6 +5,7 @@ import TodoItem from "./components/TodoItem";
 
 function App() {
   const [todos, setTodos] = useState([]);
+  console.log(typeof todos);
 
   const addTodo = (todo) => {
     setTodos((prev) => [{ id: Date.now(), ...todo }, ...prev]);
@@ -34,16 +35,17 @@ function App() {
     const todos = JSON.parse(localStorage.getItem("todos"));
     if (todos && todos.length > 0) {
       setTodos(todos);
+      console.log(todos);
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify("todos"));
+    localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
   return (
     <TodoProvider
-      value={(todos, addTodo, deleteTodo, updateTodo, toggleComplete)}
+      value={{ todos, addTodo, deleteTodo, updateTodo, toggleComplete }}
     >
       <div className="bg-[#172842] min-h-screen py-8">
         <div className="w-full max-w-2xl mx-auto shadow-md rounded-lg px-4 py-3 text-white">
