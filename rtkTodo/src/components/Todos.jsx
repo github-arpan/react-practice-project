@@ -5,10 +5,13 @@ import { removeTodo } from "../features/todoSlice";
 function Todos() {
   const todos = useSelector((state) => state.todos);
   const dispatch = useDispatch();
-  return (
+  return todos.length === 0 ? (
+    <h1 className="font-bold, text-center text-xl mt-6">
+      Your Todo is empty . Please add todo{" "}
+    </h1>
+  ) : (
     <>
-      <div>Todos</div>
-      <ul className="list-none">
+      <ul className="list-none  mx-[10%]">
         {todos.map((todo) => (
           <li
             className="mt-4 flex justify-between items-center bg-zinc-800 px-4 py-2 rounded"
