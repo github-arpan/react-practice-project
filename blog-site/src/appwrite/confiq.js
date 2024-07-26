@@ -3,7 +3,8 @@ import { Client, Databases, ID, Storage, Query } from "appwrite";
 
 export class Service {
   client = new Client();
-  account;
+  databases;
+  bucket;
 
   constructor() {
     this.client
