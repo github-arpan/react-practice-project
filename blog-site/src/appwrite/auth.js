@@ -12,7 +12,7 @@ export class AuthService {
     this.account = new Account(this.client);
   }
 
-  async createAccount({ email, password, name }) {
+  async createAccount({ email, name, password }) {
     try {
       const userAccount = await this.account.create(
         ID.unique(),
@@ -25,16 +25,16 @@ export class AuthService {
       } else {
         return userAccount;
       }
-    } catch (err) {
-      throw err;
+    } catch (error) {
+      throw error;
     }
   }
 
   async login({ email, password }) {
     try {
-      return await this.account.createEmailSeassion(email, password);
-    } catch (err) {
-      throw err;
+      return await this.account.createEmailPasswordSession(email, password);
+    } catch (error) {
+      throw error;
     }
   }
 
@@ -44,12 +44,11 @@ export class AuthService {
     } catch (error) {
       throw error;
     }
-    return null;
   }
 
   async logout() {
     try {
-      await this.account.deleteSessions();
+      return await this.account.deleteSessions();
     } catch (error) {
       throw error;
     }
@@ -57,5 +56,4 @@ export class AuthService {
 }
 
 const authService = new AuthService();
-
 export default authService;
