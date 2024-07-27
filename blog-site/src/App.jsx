@@ -5,6 +5,7 @@ import { login, logout } from "./store/authSlice";
 import "./App.css";
 import { Footer } from "./components";
 import { Header } from "./components";
+import { Spin } from "antd";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -31,7 +32,9 @@ function App() {
         <Footer />
       </div>
     </div>
-  ) : null;
+  ) : (
+    <Spin />
+  );
 }
 
 export default App;
