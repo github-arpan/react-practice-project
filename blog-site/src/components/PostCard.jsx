@@ -18,5 +18,5 @@ function PostCard({ $id, title, featuredImage }) {
     </Link>
   );
 }
-
+// fix the bug
 export default PostCard;
