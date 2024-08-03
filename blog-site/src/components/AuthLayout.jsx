@@ -18,3 +18,4 @@ export default function AuthLayout({ children, authentication = true }) {
 
   return loader ? <h1>loading</h1> : <>{children}</>;
 }
+// authlayout
