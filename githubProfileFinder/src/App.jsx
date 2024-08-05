@@ -1,24 +1,32 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import Card from "./Card";
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [userName, setUserName] = useState("");
+  const [userData, setUserData] = useState(null);
 
   const fetchData = async () => {
     const res = await fetch(`https://api.github.com/users/${userName}`);
-    const user = await res.json();
-    console.log(user);
+    const data = await res.json();
+    if (data && Object.keys(data).length > 0) {
+      setUserData(data);
+      setUserName("");
+    } else {
+      setUserData(null);
+    }
+    setLoading(false);
   };
   const handleClick = () => {
     fetchData();
+    setLoading(true);
   };
   useEffect(() => {
     fetchData();
   }, []);
   return (
     <div>
-      +
       <div>
         <input
           type="text"
@@ -34,6 +42,7 @@ function App() {
           Search
         </button>
       </div>
+      <div>{userData && <Card userData={userData} />}</div>
     </div>
   );
 }
