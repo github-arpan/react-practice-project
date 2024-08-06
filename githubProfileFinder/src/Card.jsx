@@ -2,7 +2,7 @@ import React from "react";
 
 function Card({ userData }) {
   const { avatar_url, bio, name, login, followers, following } = userData;
-  return (
+  return userData !== null ? (
     <div className="flex justify-center items-center mt-10">
       <div>
         <div>
@@ -16,7 +16,7 @@ function Card({ userData }) {
         </div>
       </div>
     </div>
-  );
+  ) : null;
 }
 
 export default Card;
