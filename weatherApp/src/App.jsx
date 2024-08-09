@@ -17,6 +17,7 @@ function App() {
       if (data) {
         setLoading(false);
         setWeatherData(data);
+        setSearch("");
         console.log(weatherData);
       }
     } catch (error) {
@@ -49,15 +50,26 @@ function App() {
       {loading ? (
         <h1></h1>
       ) : (
-        <div className="mt-10">
+        <div className="mt-10 bg-green-400/40 py-10 space-y-4 md-max-w-[80%]  mx-auto">
           <div>
-            <h1 className="font-bold text-xl">
+            <h1 className="font-bold text-2xl">
               {weatherData?.name}, <span>{weatherData?.sys?.country}</span>
             </h1>
-            <p>{getCurrentDate()}</p>
+            <p className="text-xs">{getCurrentDate()}</p>
+          </div>
+          <div className="flex justify-around font-bold ">
+            <p>
+              Current Tempareture : {Math.floor(weatherData?.main?.temp / 10)}
+              {<sup>o</sup>}
+            </p>
+            <p>
+              Fells like : {Math.floor(weatherData?.main?.feels_like / 10)}
+              {<sup>o</sup>}
+            </p>
           </div>
           <div>
-            <p>{weatherData?.main?.temp}</p>
+            <p>{weatherData?.weather[0]?.description}</p>
+            <p>Wind : {weatherData?.wind.speed} km/h</p>
           </div>
         </div>
       )}
