@@ -12,7 +12,7 @@ function Input({ search, setSearch, handleSearch }) {
       />
       <button
         onClick={handleSearch}
-        className="px-3 py-2 bg-blue-600 text-white rounded-r-lg active:scale-95"
+        className="px-3 py-2 bg-red-700 text-white rounded-r-lg active:scale-95"
       >
         Search
       </button>

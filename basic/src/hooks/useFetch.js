@@ -21,10 +21,14 @@ function useFetch(url, options = {}) {
     }
   };
 
-  useEffect(() => {
+  const handleClick = () => {
     fetchData();
-  }, [url]);
-  return { data, loading };
+  };
+
+  // useEffect(() => {
+  //   fetchData();
+  // }, [url]);
+  return { data, loading, handleClick };
 }
 
 export default useFetch;
