@@ -6,6 +6,7 @@ export default function GlobalState({ children }) {
   const [searchParam, setSearchParam] = useState("chicken");
   const [recipeList, setRecipeList] = useState([]);
   const [recipeDetailsData, setRecipeDetailsData] = useState([]);
+  const [favouriteLists, setFavouriteLists] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = (e) => {
@@ -31,9 +32,24 @@ export default function GlobalState({ children }) {
     }
   }
 
-  useEffect(() => {
-    fetchData(searchParam);
-  }, []);
+  // useEffect(() => {
+  //   fetchData(searchParam);
+  // }, []);
+
+  function handleAddToFavourite(getCurrentItem) {
+    // let copyFavList = [...favouriteLists];
+    // let index = favouriteLists.findIndex(
+    //   (item) => item.id === getCurrentItem.id
+    // );
+    // if (index === -1) {
+    //   copyFavList.push(getCurrentItem);
+    // } else {
+    //   copyFavList.slice(index);
+    // }
+
+    // setFavouriteLists(copyFavList);
+    console.log(favouriteLists);
+  }
 
   return (
     <GlobalContext.Provider
@@ -45,6 +61,9 @@ export default function GlobalState({ children }) {
         loading,
         recipeDetailsData,
         setRecipeDetailsData,
+        favouriteLists,
+        setFavouriteLists,
+        handleAddToFavourite,
       }}
     >
       {children}
