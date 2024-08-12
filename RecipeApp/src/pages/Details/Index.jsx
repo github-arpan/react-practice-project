@@ -14,7 +14,7 @@ function Details() {
         );
         const data = await res.json();
 
-        if (data && data.data.recipe) {
+        if (data && data?.data.recipe) {
           setRecipeDetailsData(data.data.recipe);
         }
       } catch (error) {
@@ -22,13 +22,10 @@ function Details() {
       }
     }
     getRecipeDetails();
-  }, [id, setRecipeDetailsData]);
+    console.log(recipeDetailsData.ingredients);
+  }, [id, recipeDetailsData]);
 
-  if (!recipeDetailsData) {
-    return <div>Loading...</div>;
-  }
-
-  return (
+  return recipeDetailsData ? (
     <div className="flex md:flex-row flex-col m-10">
       <div className="md:flex-1 h-full md:w-[500px] md:h-[500px]  object-cover rounded-xl">
         <img
@@ -41,18 +38,25 @@ function Details() {
         <h3 className="text-center font-bold text-xl">
           {recipeDetailsData.title}
         </h3>
+        <p>{recipeDetailsData.publisher}</p>
         <p>Serving: {recipeDetailsData.servings}</p>
         <p>Cooking time: {recipeDetailsData.cooking_time} min</p>
-        <div className="mt-6">
+
+        <div>
           <ul>
-            {recipeDetailsData.ingredients.map((ingredient, index) => (
-              <li key={index}>
-                <span>{ingredient.quantity}</span>
-                <span>{ingredient.unit}</span>
-                <span>{ingredient.description}</span>
-              </li>
-            ))}
+            {recipeDetailsData.ingredients.length > 0 &&
+              recipeDetailsData.ingredients.map((ingredient, index) => (
+                <li key={index}>
+                  <span>{ingredient.quantity}</span>
+                  <span>{ingredient.unit} </span>
+                  <span>{ingredient.description} </span>
+                </li>
+              ))}
           </ul>
+        </div>
+
+        <div className="font-bold mt-4">
+          <a href={recipeDetailsData.source_url}>Read more ...</a>
         </div>
         <div>
           <button className="w-full bg-black/70 text-white py-1 mt-10 hover:bg-black/90 rounded-md uppercase">
@@ -61,6 +65,8 @@ function Details() {
         </div>
       </div>
     </div>
+  ) : (
+    <h1>Loading</h1>
   );
 }
 
