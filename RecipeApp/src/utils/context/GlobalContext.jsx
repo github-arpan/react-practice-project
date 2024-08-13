@@ -3,11 +3,33 @@ import { createContext, useEffect, useState } from "react";
 export const GlobalContext = createContext(null);
 
 export default function GlobalState({ children }) {
-  const [searchParam, setSearchParam] = useState("chicken");
+  const [searchParam, setSearchParam] = useState("burger");
   const [recipeList, setRecipeList] = useState([]);
   const [recipeDetailsData, setRecipeDetailsData] = useState([]);
   const [favouriteLists, setFavouriteLists] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [showInput, setShowInput] = useState(false);
+  const [isWideScreen, setIsWideScreen] = useState(window.innerWidth >= 768);
+
+  useEffect(() => {
+    function handleResizer() {
+      setIsWideScreen(window.innerWidth >= 768);
+    }
+
+    window.addEventListener("resize", handleResizer);
+
+    return () => {
+      window.removeEventListener("resize", handleResizer);
+    };
+  }, []);
+  console.log(loading);
+
+  function handleClick(e) {
+    e.preventDefault();
+    if (isWideScreen !== true) {
+      setShowInput(!showInput);
+    }
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,6 +46,7 @@ export default function GlobalState({ children }) {
       if (data && data.data.recipes && data.data.recipes.length) {
         setRecipeList(data.data.recipes);
         setSearchParam("");
+        setShowInput(false);
       }
       setLoading(false);
     } catch (error) {
@@ -32,23 +55,27 @@ export default function GlobalState({ children }) {
     }
   }
 
-  // useEffect(() => {
-  //   fetchData(searchParam);
-  // }, []);
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   function handleAddToFavourite(getCurrentItem) {
-    // let copyFavList = [...favouriteLists];
-    // let index = favouriteLists.findIndex(
-    //   (item) => item.id === getCurrentItem.id
-    // );
-    // if (index === -1) {
-    //   copyFavList.push(getCurrentItem);
-    // } else {
-    //   copyFavList.slice(index);
-    // }
+    let copyFavList = [...favouriteLists];
+    let index = favouriteLists.findIndex(
+      (item) => item.id === getCurrentItem.id
+    );
+    if (index === -1) {
+      copyFavList.push(getCurrentItem);
+    } else {
+      copyFavList.splice(index);
+    }
 
-    // setFavouriteLists(copyFavList);
+    setFavouriteLists(copyFavList);
     console.log(favouriteLists);
+  }
+
+  function handleClearFav() {
+    setFavouriteLists([]);
   }
 
   return (
@@ -64,6 +91,12 @@ export default function GlobalState({ children }) {
         favouriteLists,
         setFavouriteLists,
         handleAddToFavourite,
+        showInput,
+        setShowInput,
+        isWideScreen,
+        setIsWideScreen,
+        handleClick,
+        handleClearFav,
       }}
     >
       {children}

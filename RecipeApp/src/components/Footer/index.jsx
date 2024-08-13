@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-    <footer className="bg-slate-200 dark:bg-gray-900">
+    <footer className="bg-[#a78262]  mt-10">
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
@@ -18,7 +18,7 @@ function Footer() {
               <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
                 Help
               </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+              <ul className=" dark:text-gray-400 font-medium">
                 <li className="mb-4">
                   <a href="#" className="hover:underline">
                     About
@@ -32,10 +32,10 @@ function Footer() {
               </ul>
             </div>
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+              <h2 className="mb-6 text-sm font-semibold  uppercase dark:text-white">
                 Follow us
               </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+              <ul className=" dark:text-gray-400 font-medium">
                 <li className="mb-4">
                   <a
                     href="https://github.com/github-arpan"
@@ -55,10 +55,10 @@ function Footer() {
               </ul>
             </div>
             <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+              <h2 className="mb-6 text-sm font-semibold  uppercase dark:text-white">
                 Legal
               </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
+              <ul className=" dark:text-gray-400 font-medium">
                 <li className="mb-4">
                   <a href="#" className="hover:underline">
                     Privacy Policy
@@ -73,13 +73,13 @@ function Footer() {
             </div>
           </div>
         </div>
-        <hr className="my-6 border-gray-400 sm:mx-auto dark:border-gray-700 lg:my-6" />
+        <hr className="my-6 border-gray-600 sm:mx-auto dark:border-gray-700 lg:my-6" />
         <div className="sm:flex sm:items-center ">
           <div className=" w-full  py-2">
             <p className="w-full text-center">
               Created with ❤️ By
               <span className="font-bold">
-                <a href="https://github.com/github-arpan"> Arpan </a>
+                <a href="https://arpanchrakraborty.netlify.app/"> Arpan </a>
               </span>
               2024 ©ArpanChakraborty
             </p>

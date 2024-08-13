@@ -1,32 +1,41 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import Input from "./Input";
+import { IoSearch } from "react-icons/io5";
+import { RxCross2 } from "react-icons/rx";
 import { GlobalContext } from "../../utils/context/GlobalContext";
 
 function Navbar() {
-  const { handleSubmit, searchParam, setSearchParam } =
+  const { handleClick, isWideScreen, showInput, favouriteLists } =
     useContext(GlobalContext);
+
   return (
     <div className="fixed top-0 z-10 w-full ">
-      <div className="flex justify-between items-center px-4  bg-white shadow-gray-500 shadow h-16 outline-none border-none focus:border-none  ">
-        <div className="mb-6 md:mb-0">
-          <Link to="/" className="flex items-center">
-            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+      <div className="flex justify-between items-center md:px-10 px-6  bg-[#a78262] shadow-gray-500 shadow h-16 outline-none border-none focus:border-none text-black  ">
+        <div>
+          <Link to="">
+            <span className="md:text-xl font-semibold whitespace-nowrap dark:text-white">
               RecipeBooks
             </span>
           </Link>
         </div>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Enter food name "
-            className="px-3 py-1 rounded-l-lg border-none outline-none  shadow-gray-600 shadow "
-            value={searchParam}
-            onChange={(e) => setSearchParam(e.target.value)}
-          />
-          <button className="px-2  py-1 bg-blue-700 rounded-r-lg text-white shadow-gray-600 shadow  ">
-            Search
-          </button>
-        </form>
+        <div className="relative flex items-center justify-center">
+          {isWideScreen ? (
+            <Input />
+          ) : (
+            <>
+              <div className="cursor-pointer" onClick={handleClick}>
+                {!showInput ? <IoSearch /> : <RxCross2 />}
+              </div>
+              {showInput && (
+                <div className="absolute -bottom-20 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ">
+                  <Input />
+                </div>
+              )}
+            </>
+          )}
+        </div>
+
         <ul className="flex gap-5">
           <Link to="">
             <li className="self-center  font-semibold whitespace-nowrap dark:text-white">
@@ -35,7 +44,7 @@ function Navbar() {
           </Link>
           <Link to="/favourites">
             <li className="self-center  font-semibold whitespace-nowrap dark:text-white">
-              Favorites
+              Favorites (<span>{favouriteLists.length}</span>)
             </li>
           </Link>
         </ul>

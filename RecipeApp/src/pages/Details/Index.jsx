@@ -5,8 +5,12 @@ import { GlobalContext } from "../../utils/context/GlobalContext";
 
 function Details() {
   const { id } = useParams();
-  const { recipeDetailsData, setRecipeDetailsData, handleAddToFavourite } =
-    useContext(GlobalContext);
+  const {
+    recipeDetailsData,
+    setRecipeDetailsData,
+    handleAddToFavourite,
+    favouriteLists,
+  } = useContext(GlobalContext);
 
   useEffect(() => {
     async function getRecipeDetails() {
@@ -24,15 +28,16 @@ function Details() {
       }
     }
     getRecipeDetails();
-  }, [id, recipeDetailsData]);
+  }, [id]);
+  console.log(recipeDetailsData);
 
   return recipeDetailsData ? (
-    <div className="flex md:flex-row flex-col m-10">
+    <div className="flex md:flex-row flex-col m-10 bg-[#f6f4f3] py-20">
       <div className="md:flex-1 h-full md:w-[500px] md:h-[500px]  object-cover rounded-xl">
         <img
           src={recipeDetailsData.image_url}
           alt={recipeDetailsData.title}
-          className="h-full w-full object-cover p-5 rounded-xl"
+          className="h-full w-full object-cover p-5 "
         />
       </div>
       <div className="md:flex-1 p-5 ">
@@ -64,9 +69,14 @@ function Details() {
         <div>
           <button
             onClick={() => handleAddToFavourite(recipeDetailsData)}
-            className="w-full bg-black/70 text-white py-1 mt-10 hover:bg-black/90 rounded-md uppercase"
+            className="w-full bg-[#bc8741] text-black font-semibold py-1 mt-10 hover:bg-[#9a6a2c]  rounded-md uppercase"
           >
-            Add to favourites
+            {favouriteLists &&
+            favouriteLists.findIndex(
+              (item) => item.id === recipeDetailsData.id
+            ) !== -1
+              ? "Remove from favourites"
+              : "Add to favourite"}
           </button>
         </div>
       </div>

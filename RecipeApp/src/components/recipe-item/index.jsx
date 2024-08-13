@@ -5,9 +5,9 @@ function RecipeItem({ item }) {
   return (
     <div
       key={item.id}
-      className=" w-48 border p-3  shadow-lg rounded-lg hover:scale-110 transition-all duration-100 "
+      className=" md:w-56 w-44  border p-3  shadow-lg rounded-lg hover:scale-110 transition-all duration-100 "
     >
-      <div className=" h-36 rounded-lg object-cover">
+      <div className=" md:h-36 h-24 rounded-lg object-cover">
         <img
           src={item.image_url}
           alt="recipe"
@@ -17,7 +17,7 @@ function RecipeItem({ item }) {
       <h3 className="text-sm  py-1   font-bold truncate">{item.title}</h3>
       <p className="text-[10px]">{item.publisher}</p>
       <Link to={`/recipe-item/${item?.id}`}>
-        <button className="w-full bg-black/70 text-white py-1 my-1 rounded-md uppercase">
+        <button className="w-full bg-[#bc8741] hover:bg-[#7b5422] text-white text-xs py-1 my-1 rounded-md uppercase">
           Recipe details
         </button>
       </Link>
