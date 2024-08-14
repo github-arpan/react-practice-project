@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeToCart } from "../../store/CartSlice";
 
-function CardTile({ product }) {
+function CartTile({ product }) {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
 
@@ -14,17 +14,17 @@ function CardTile({ product }) {
     dispatch(removeToCart(product.id));
   };
   return (
-    <div className=" w-48 border flex flex-col items-center space-y-2 p-5 shadow-lg rounded-lg hover:scale-110 transition-all ">
-      <div className="h-36 w-36 flex justify-center">
+    <div className=" border flex flex-row items-center justify-between p-5 shadow-lg rounded-lg">
+      <div className="h-20 w-20  flex justify-center">
         <img
           src={product.image}
           alt={product.title}
-          className="object-contain h-full"
+          className="object-contain h-full "
         />
       </div>
-      <div className="">
-        <h3 className="truncate w-32">{product.title}</h3>
-        <p>Price : {product.price}</p>
+      <div className="p-2">
+        <h3>{product.title}</h3>
+        <p className="font-semibold">Price : ${product.price}</p>
       </div>
       <button
         onClick={
@@ -32,12 +32,16 @@ function CardTile({ product }) {
             ? handleRemove
             : handleAddToCart
         }
-        className="px-2 py-1 bg-blue-900 text-white"
+        className="px-2 font-bold text-xl uppercase"
       >
-        {cart.some((item) => item.id === product.id) ? "remove" : "Add to cart"}
+        {cart.some((item) => item.id === product.id) ? (
+          <span className="text-red-600 "> remove</span>
+        ) : (
+          "Add to cart"
+        )}
       </button>
     </div>
   );
 }
 
-export default CardTile;
+export default CartTile;

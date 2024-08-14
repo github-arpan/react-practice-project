@@ -1,10 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 function Header() {
+  const cart = useSelector((state) => state.cart);
   return (
     <div>
-      <nav className="flex items-center justify-between h-24 px-10 bg-gray-500 ">
+      <nav className="flex items-center justify-between h-24 px-10 bg-[#386790]  ">
         <div>
           <Link to={"/"}>
             <h1 className="font-semibold text-2xl">ShopNow</h1>
@@ -16,7 +18,7 @@ function Header() {
           </Link>
 
           <Link to={"/cart"}>
-            <li>Cart</li>
+            <li>Cart({cart.length})</li>
           </Link>
         </ul>
       </nav>

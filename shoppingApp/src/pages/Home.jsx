@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CardTile from "../components/Card-title";
-
+import { Circles } from "react-loader-spinner";
 function Home() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -11,9 +11,11 @@ function Home() {
       const data = await res.json();
       if (data && data.length > 0) {
         setProducts(data);
+        setLoading(false);
       }
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   }
 
@@ -22,9 +24,14 @@ function Home() {
   }, []);
 
   return (
-    <div className="w-full my-10">
+    <div className="w-full min-h-[300px] md:min-h-[600px] my-10">
+      {loading && (
+        <div className="flex justify-center items-center">
+          <Circles color="rgb(50, 0, 255)" />
+        </div>
+      )}
       {products ? (
-        <div className="flex flex-wrap gap-8 justify-center">
+        <div className="flex flex-wrap md:w-4/5 mx-auto gap-8 justify-center">
           {products.map((item) => (
             <div key={item.id}>
               <CardTile product={item} />
