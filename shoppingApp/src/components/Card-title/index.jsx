@@ -14,7 +14,7 @@ function CardTile({ product }) {
     dispatch(removeToCart(product.id));
   };
   return (
-    <div className=" w-48 border flex flex-col items-center space-y-2 p-5 shadow-lg rounded-lg hover:scale-110 transition-all ">
+    <div className=" md:w-48 w-40 border flex flex-col items-center space-y-2 p-5 shadow-lg rounded-lg hover:scale-110 transition-all ">
       <div className="h-36 w-36 flex justify-center">
         <img
           src={product.image}
@@ -32,9 +32,13 @@ function CardTile({ product }) {
             ? handleRemove
             : handleAddToCart
         }
-        className="px-2 py-1 bg-blue-900 text-white"
+        className="px-2 py-1 text-[14px] md:text-xl font-semibold uppercase border bg-slate-100"
       >
-        {cart.some((item) => item.id === product.id) ? "remove" : "Add to cart"}
+        {cart.some((item) => item.id === product.id) ? (
+          <span className="text-red-600">X remove</span>
+        ) : (
+          "Add to cart"
+        )}
       </button>
     </div>
   );

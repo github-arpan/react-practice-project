@@ -31,7 +31,7 @@ function Home() {
         </div>
       )}
       {products ? (
-        <div className="flex flex-wrap md:w-4/5 mx-auto gap-8 justify-center">
+        <div className="flex flex-wrap md:w-4/5 mx-auto gap-6 justify-center">
           {products.map((item) => (
             <div key={item.id}>
               <CardTile product={item} />

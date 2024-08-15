@@ -1,13 +1,9 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { orderPlaced } from "../../store/CartSlice";
+
 import { HiBadgeCheck } from "react-icons/hi";
 
 function Modal({ setOpenModal }) {
-  const dispatch = useDispatch();
-
   function handleOrderPlace() {
-    dispatch(orderPlaced());
     setOpenModal(false);
   }
   return (
